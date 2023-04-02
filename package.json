@@ -50,7 +50,7 @@
       "prettier --config ./prettier.config.cjs --write"
     ],
     "**/*.{css,scss,md,html,json}": [
-      "pnpm prettier --config ./prettier.config.cjs --write"
+      "prettier --config ./prettier.config.cjs --write"
     ]
   },
   "config": {
