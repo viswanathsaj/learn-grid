@@ -1,6 +1,6 @@
 import { type AppType } from 'next/app'
 
-import { api } from '@component/utils/api'
+import { api } from '@utils/api'
 
 import '@component/styles/globals.css'
 
