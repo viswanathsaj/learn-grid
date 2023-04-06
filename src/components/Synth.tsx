@@ -1,43 +1,8 @@
 import type { NextComponentType } from 'next'
 import Head from 'next/head'
-import { WebMidi } from 'webmidi'
-import { startTone, synth } from '@utils/synth'
-import * as Tone from 'tone'
+import { listen, sleep, getInfo, noteMode, playNote } from '@utils/midi'
 
 const Synth: NextComponentType = () => {
-  const myInput = WebMidi.getInputByName('Launchpad X LPX MIDI Out')
-  const myOutput = WebMidi.getOutputByName('Launchpad X LPX MIDI In')
-
-  const listen = () => {
-    if (myInput && myOutput) {
-      startTone()
-      myInput.addListener('noteon', (e) => {
-        synth.triggerAttack(e.note.identifier, Tone.now(), e.note.attack)
-      })
-      myInput.addListener('noteoff', (e) => {
-        synth.triggerRelease(e.note.identifier, e.note.release + 1)
-      })
-
-      myInput.addListener('sysex', (e) => {
-        console.log(e.message)
-      })
-    } else {
-      console.log("Can't Find Device")
-    }
-  }
-
-  const sleep = () => {
-    try {
-      myOutput.send([240, 0, 32, 41, 2, 12, 9, 0, 247])
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const getInfo = () => (myOutput.send([240, 126, 127, 6, 1, 247]) ? true : false)
-
-  const noteMode = () => (myOutput.send([240, 0, 32, 41, 2, 12, 0, 1, 247]) ? true : false)
-
   return (
     <>
       <Head>
@@ -51,6 +16,7 @@ const Synth: NextComponentType = () => {
           <button onClick={() => listen()}>Listen</button>
           <button onClick={() => getInfo()}>Info</button>
           <button onClick={() => noteMode()}>Note Mode</button>
+          <button onClick={() => playNote('C4')}>Note Mode</button>
         </div>
       </main>
     </>

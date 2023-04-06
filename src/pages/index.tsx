@@ -8,7 +8,6 @@ const Home: NextPage = () => {
 
   WebMidi.enable({ sysex: true })
     .then(() => {
-      console.log('WebMidi enabled')
       setStatus('enabled')
     })
     .catch((err) => alert(err))
