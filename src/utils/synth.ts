@@ -7,7 +7,7 @@ Tone.start()
 Tone.Transport.start()
 
 const synth = new Tone.PolySynth(Tone.Synth, {
-  volume: -5,
+  volume: -3,
   detune: 0,
   portamento: 0.05,
   envelope: {
