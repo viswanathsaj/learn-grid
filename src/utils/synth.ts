@@ -1,12 +1,14 @@
 import * as Tone from 'tone'
 
-Tone.start()
-  .then(() => console.log('started'))
-  .catch(() => console.log('failed'))
+export const startTone = () => {
+  Tone.start()
+    .then(() => 'started')
+    .catch(() => {
+      throw new Error('Failed to start Tone')
+    })
+}
 
-Tone.Transport.start()
-
-const synth = new Tone.PolySynth(Tone.Synth, {
+export const synth = new Tone.PolySynth(Tone.Synth, {
   volume: -3,
   detune: 0,
   portamento: 0.05,
@@ -27,5 +29,3 @@ const synth = new Tone.PolySynth(Tone.Synth, {
     harmonicity: 0.5
   }
 }).toDestination()
-
-export default synth

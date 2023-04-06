@@ -1,10 +1,8 @@
 import type { NextComponentType } from 'next'
 import Head from 'next/head'
-import { useState } from 'react'
-import { Output, WebMidi } from 'webmidi'
-import synth from '@utils/synth'
+import { WebMidi } from 'webmidi'
+import { startTone, synth } from '@utils/synth'
 import * as Tone from 'tone'
-import { get } from 'http'
 
 const Synth: NextComponentType = () => {
   const myInput = WebMidi.getInputByName('Launchpad X LPX MIDI Out')
@@ -12,13 +10,12 @@ const Synth: NextComponentType = () => {
 
   const listen = () => {
     if (myInput && myOutput) {
-      console.log('added listeners')
+      startTone()
       myInput.addListener('noteon', (e) => {
-        console.log(Tone.Transport.state)
         synth.triggerAttack(e.note.identifier, Tone.now(), e.note.attack)
       })
       myInput.addListener('noteoff', (e) => {
-        synth.triggerRelease(e.note.identifier, e.note.release)
+        synth.triggerRelease(e.note.identifier, e.note.release + 1)
       })
 
       myInput.addListener('sysex', (e) => {
