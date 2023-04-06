@@ -3,4 +3,4 @@
 
 echo "Styling and linting your project before committing 👷‍♂️🏗️"
 
-pnpm lint-staged
+pnpm lint-staged -c ./.lintstagedrc.cjs

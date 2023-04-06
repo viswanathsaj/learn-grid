@@ -48,14 +48,6 @@
   "ct3aMetadata": {
     "initVersion": "7.10.1"
   },
-  "lint-staged": {
-    "**/*.{js,jsx,ts,tsx}": [
-      "prettier --config ./prettier.config.cjs --write"
-    ],
-    "**/*.{css,scss,md,html,json}": [
-      "prettier --config ./prettier.config.cjs --write"
-    ]
-  },
   "config": {
     "commitizen": {
       "path": "./node_modules/commitizen-emoji"
