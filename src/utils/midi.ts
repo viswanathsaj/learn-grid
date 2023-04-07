@@ -1,5 +1,6 @@
 import { WebMidi } from 'webmidi'
 import { synth, startTone } from './synth'
+import { Midi } from 'tonal'
 
 const midiInput = WebMidi.getInputByName('Launchpad X LPX MIDI Out')
 const midiOutput = WebMidi.getOutputByName('Launchpad X LPX MIDI In')
@@ -8,6 +9,8 @@ export const listen = () => {
   if (midiInput && midiOutput) {
     startTone()
     midiInput.addListener('noteon', (e) => {
+      console.log(Midi.midiToNoteName(e.note.number))
+      // console.log((e.note.identifier))
       synth.triggerAttack(e.note.identifier, synth.now(), e.note.attack)
     })
     midiInput.addListener('noteoff', (e) => {
@@ -35,6 +38,15 @@ export const playNote = (note: string) => {
     midiOutput.playNote(note, {
       duration: 1000
     })
+  } catch (error) {
+    console.log(error)
+  }
+}
+;['F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E']
+
+export const noteConfig = () => {
+  try {
+    midiOutput.send([240, 0, 32, 41, 2, 12, 22, 247])
   } catch (error) {
     console.log(error)
   }
