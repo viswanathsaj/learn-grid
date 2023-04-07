@@ -2,8 +2,9 @@ import { fontFamily } from 'tailwindcss/defaultTheme'
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  mode: 'jit',
   darkMode: ['class', '[data-theme="dark"]'],
-  content: ['src/pages/**/*.{ts,tsx}', 'src/components/**/*.{ts,tsx}'],
+  content: ['src/pages/**/*.{ts,tsx}', 'src/components/**/*.{ts,tsx}', './public/**/*.html'],
   theme: {
     extend: {
       fontFamily: {
